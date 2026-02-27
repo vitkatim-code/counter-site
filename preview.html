@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Счётчик</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #111;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        .top-text {
+            position: absolute;
+            top: 40px;
+            font-size: 40px;
+        }
+
+        #counter {
+            font-size: 150px;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.1s ease;
+            margin: 20px 0;
+        }
+
+        #counter:active {
+            transform: scale(0.95);
+        }
+
+        .bottom-text {
+            font-size: 40px;
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 40px;
+        }
+
+        input {
+            width: 100px;
+            font-size: 20px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 6px 15px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-text">Осталось продать:</div>
+
+<div id="counter">250</div>
+
+<div class="bottom-text">Субботничных компаний</div>
+
+<div class="controls">
+    <input type="number" id="numberInput" min="0" max="250" placeholder="0-250">
+    <button onclick="setValue()">Установить</button>
+</div>
+
+<script>
+    const counter = document.getElementById("counter");
+    const numberInput = document.getElementById("numberInput");
+    let value = 250;
+
+    counter.addEventListener("click", () => {
+        if (value > 0) {
+            value--;
+            counter.textContent = value;
+        }
+    });
+
+    function setValue() {
+        let newValue = parseInt(numberInput.value);
+
+        if (!isNaN(newValue) && newValue >= 0 && newValue <= 250) {
+            value = newValue;
+            counter.textContent = value;
+            numberInput.value = "";
+        } else {
+            alert("Введите число от 0 до 250");
+        }
+    }
+</script>
+
+</body>
+</html>
